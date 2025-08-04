@@ -14,6 +14,7 @@ function Fish:new(o)
     o = o or {}
     setmetatable(o, self)
     self.__index = self
+    self:initialize()
     return o
 end
 
