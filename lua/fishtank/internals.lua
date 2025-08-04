@@ -11,6 +11,7 @@ local globalState = {
     fishList = {},
     intervalID = nil,
     state = constants.FISHTANK_HIDDEN,
+    paused = false,
 }
 
 -- initializes the fishList data
@@ -20,6 +21,12 @@ local initializeFish = function()
 end
 
 local updateAllFish = function()
+    -- do nothing if paused
+    if globalState.paused then
+        return
+    end
+
+    -- update all fish in the fishList
     for i, fish in ipairs(globalState.fishList) do
         fish:update()
     end
@@ -106,6 +113,13 @@ M.fishtankUserCommand = function(args)
             'Invalid Fishtank.nvim command. See `:h fishtank` for details.'
         )
     end
+end
+
+M.pauseFishtank = function()
+    globalState.paused = true
+end
+M.resumeFishtank = function()
+    globalState.paused = false
 end
 
 return M

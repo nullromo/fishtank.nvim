@@ -11,9 +11,18 @@ M.setup = function()
 
     vim.api.nvim_create_autocmd({ 'CmdlineEnter' }, {
         callback = function()
-            vim.notify('cmdline entered')
+            internals.pauseFishtank()
         end,
         desc = 'pause fishtank.nvim while typing a command',
+    })
+
+    vim.api.nvim_create_autocmd({ 'CmdlineLeave' }, {
+        callback = function()
+            -- NOTE: this will resume the fishtank even if there is a "Press
+            -- ENTER or type command to continue" prompt
+            internals.resumeFishtank()
+        end,
+        desc = 'resume fishtank.nvim when done typing a command',
     })
 end
 
