@@ -233,7 +233,7 @@ M.fishtankUserCommand = function(args)
 
     -- take action based on first argument
     if splitResult.first == 'start' then
-        showFishtank()
+        M.showFishtank()
     elseif splitResult.first == 'stop' then
         hideFishtank()
     elseif splitResult.first == 'toggle' then
