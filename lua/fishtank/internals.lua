@@ -204,7 +204,7 @@ local hideFishtank = function()
 end
 
 -- turns on the fishtank and initializes the state
-M.showFishtank = function()
+M.showFishtank = function(args)
     -- if the fishtank is already showing, do nothing
     if fishtankWindowID ~= nil then
         return
@@ -240,6 +240,22 @@ M.showFishtank = function()
         updateFish()
         updateFishtank()
     end)
+end
+
+M.fishtankUserCommand = function(args)
+    -- split arguments
+    local splitResult = luaUtils.splitFirstToken(opts.args)
+
+    -- take action based on first argument
+    if splitResult.first == 'start' then
+        vim.print('TODO start')
+    elseif splitResult.first == 'stop' then
+        vim.print('TODO stop')
+    elseif splitResult.first == 'toggle' then
+        vim.print('TODO toggle')
+    else
+        vim.print('Invalid :Fishtank command. See `:h fishtank` for details.')
+    end
 end
 
 return M
