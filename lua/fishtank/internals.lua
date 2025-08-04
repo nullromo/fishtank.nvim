@@ -1,7 +1,7 @@
 local constants = require('fishtank.constants')
-local luaUtils = require('fishtank.luaUtils')
-local mathUtils = require('fishtank.mathUtils')
-local vimUtils = require('fishtank.vimUtils')
+local luaUtils = require('fishtank.util.lua')
+local mathUtils = require('fishtank.util.math')
+local vimUtils = require('fishtank.util.vim')
 
 local M = {}
 
