@@ -98,7 +98,7 @@ M.fishtankUserCommand = function(args)
     if splitResult.first == 'start' then
         M.showFishtank()
     elseif splitResult.first == 'stop' then
-        hideFishtank()
+        M.hideFishtank()
     elseif splitResult.first == 'toggle' then
         vim.print('TODO toggle')
     else
