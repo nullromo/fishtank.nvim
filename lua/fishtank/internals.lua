@@ -18,17 +18,9 @@ local fish = {
     travelPoints = {},
 }
 
--- determine size of editor
-local getEditorSize = function()
-    return {
-        rows = tonumber(vim.api.nvim_command_output('echo &lines')) or 0,
-        cols = tonumber(vim.api.nvim_command_output('echo &columns')) or 0,
-    }
-end
-
 -- generate a random position in the editor
 local randomPosition = function()
-    local editorSize = getEditorSize()
+    local editorSize = vimUtils.getEditorSize()
     return {
         row = math.floor(math.random(editorSize.rows)),
         col = math.floor(math.random(editorSize.cols)),
@@ -46,7 +38,7 @@ end
 -- generates a smooth set of points between start and end
 local sinspace = function(start, finish)
     -- compute distance scale based on maximum possible travel distance
-    local editorSize = getEditorSize()
+    local editorSize = vimUtils.getEditorSize()
     local maxDistance = computeDistance(
         { row = 0, col = 0 },
         { row = editorSize.rows, col = editorSize.cols }
@@ -171,7 +163,7 @@ local updateFishtank = function()
 end
 
 -- turns off the fishtank and wipes the state
-local hideFishtank = function()
+M.hideFishtank = function()
     -- if the fishtank is not showing, do nothing
     if fishtankWindowID == nil then
         return
