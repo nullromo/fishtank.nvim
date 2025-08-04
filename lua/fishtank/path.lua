@@ -82,7 +82,7 @@ end
 -- determine a new destination point and generate a list of points to
 -- travel along to get to that point
 M.computeNewPath = function(fish)
-    local destination = randomPosition()
+    local destination = M.randomPosition()
     return sinspace(fish.position, destination)
 end
 
