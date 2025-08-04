@@ -244,7 +244,7 @@ end
 
 M.fishtankUserCommand = function(args)
     -- split arguments
-    local splitResult = luaUtils.splitFirstToken(opts.args)
+    local splitResult = luaUtils.splitFirstToken(args)
 
     -- take action based on first argument
     if splitResult.first == 'start' then
