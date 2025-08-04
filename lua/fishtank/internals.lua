@@ -1,5 +1,6 @@
 local constants = require('fishtank.constants')
 local luaUtils = require('fishtank.luaUtils')
+local mathUtils = require('fishtank.mathUtils')
 local vimUtils = require('fishtank.vimUtils')
 
 local M = {}
@@ -27,23 +28,15 @@ local randomPosition = function()
     }
 end
 
--- compute distance between points
-local computeDistance = function(start, finish)
-    return math.sqrt(
-        math.pow(finish.row - start.row, 2)
-            + math.pow(finish.col - start.col, 2)
-    )
-end
-
 -- generates a smooth set of points between start and end
 local sinspace = function(start, finish)
     -- compute distance scale based on maximum possible travel distance
     local editorSize = vimUtils.getEditorSize()
-    local maxDistance = computeDistance(
+    local maxDistance = mathUtils.computeDistance(
         { row = 0, col = 0 },
         { row = editorSize.rows, col = editorSize.cols }
     )
-    local distance = computeDistance(start, finish)
+    local distance = mathUtils.computeDistance(start, finish)
     local distanceScale = distance / maxDistance
 
     -- minimum travel points is based on how far the fish has to go. If the
