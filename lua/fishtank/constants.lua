@@ -20,4 +20,8 @@ M.MAX_DELAY_POINTS = 20 -- two seconds at 100 ms/pt
 -- scaling factor for exhaustion
 M.EXHAUSTION_FACTOR = 3 -- amount to scale delay by based on speed
 
+-- plugin states
+M.FISHTANK_HIDDEN = 'hidden'
+M.FISHTANK_SHOWN_BY_USER = 'shown by user'
+M.FISHTANK_SHOWN_BY_TIMER = 'shown by timer'
 return M
