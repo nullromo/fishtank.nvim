@@ -1,23 +1,8 @@
+local constants = require('fishtank.constants')
 local luaUtils = require('fishtank.luaUtils')
 local vimUtils = require('fishtank.vimUtils')
 
 local M = {}
-
--- constants
-local RIGHT_FACING_FISH = '><>' -- fish moving to the right
-local LEFT_FACING_FISH = '<><' -- fish moving to the left
--- time to wait between updates
-local POINT_TRAVEL_TIME = 100 -- milliseconds per point (ms/pt)
--- number of points per path
-local MIN_TRAVEL_POINTS = 10 -- half a second at 100 ms/pt
-local MAX_TRAVEL_POINTS = 50 -- five seconds at 100 ms/pt
--- scaling factor for speed limiting
-local MIN_POINTS_SCALING = 0.9
--- min number of delay points after travel
-local MIN_DELAY_POINTS = 0 -- 0 seconds (no additional delay)
-local MAX_DELAY_POINTS = 20 -- two seconds at 100 ms/pt
--- scaling factor for exhaustion
-local EXHAUSTION_FACTOR = 3 -- amount to scale delay by based on speed
 
 -- global window ID
 local fishtankBufferID = nil
@@ -29,7 +14,7 @@ local intervalID = nil
 -- global fish object
 local fish = {
     position = { row = 0, col = 0 },
-    text = RIGHT_FACING_FISH,
+    text = constants.RIGHT_FACING_FISH,
     travelPoints = {},
 }
 
@@ -74,21 +59,21 @@ local sinspace = function(start, finish)
     -- allowed to only travel a few points. However, if the fish is moving
     -- far, then distance scale will be large and it's not allowed to zoom
     -- super fast
-    local minTravelPoints = MIN_TRAVEL_POINTS
-        + MIN_POINTS_SCALING
-            * (MAX_TRAVEL_POINTS - MIN_TRAVEL_POINTS)
+    local minTravelPoints = constants.MIN_TRAVEL_POINTS
+        + constants.MIN_POINTS_SCALING
+            * (constants.MAX_TRAVEL_POINTS - constants.MIN_TRAVEL_POINTS)
             * distanceScale
-    if minTravelPoints > MAX_TRAVEL_POINTS then
-        minTravelPoints = MAX_TRAVEL_POINTS
+    if minTravelPoints > constants.MAX_TRAVEL_POINTS then
+        minTravelPoints = constants.MAX_TRAVEL_POINTS
     end
 
     -- number of points to travel through to get to destination
     local numberOfPoints =
-        math.floor(math.random(minTravelPoints, MAX_TRAVEL_POINTS))
+        math.floor(math.random(minTravelPoints, constants.MAX_TRAVEL_POINTS))
 
     -- compute the speed relative to the potential speed
     local speedFactor = (numberOfPoints - minTravelPoints)
-        / (MAX_TRAVEL_POINTS - minTravelPoints)
+        / (constants.MAX_TRAVEL_POINTS - minTravelPoints)
     if speedFactor < 0 then
         speedFactor = 0
     end
@@ -115,8 +100,8 @@ local sinspace = function(start, finish)
 
     -- add delay points
     local numberOfDelayPoints = math.floor(
-        math.random(MIN_DELAY_POINTS, MAX_DELAY_POINTS)
-    ) * (1 + speedFactor * EXHAUSTION_FACTOR)
+        math.random(constants.MIN_DELAY_POINTS, constants.MAX_DELAY_POINTS)
+    ) * (1 + speedFactor * constants.EXHAUSTION_FACTOR)
     for i = 1, numberOfDelayPoints do
         points[numberOfPoints + i] = { row = finish.row, col = finish.col }
     end
@@ -132,8 +117,8 @@ local initializeFish = function()
     -- select a random direction
     fish.text = luaUtils.ternary(
         math.random(2) == 1,
-        RIGHT_FACING_FISH,
-        LEFT_FACING_FISH
+        constants.RIGHT_FACING_FISH,
+        constants.LEFT_FACING_FISH
     )
 
     -- reset the travel points
@@ -157,8 +142,8 @@ local updateFish = function()
         -- update the fish's facing position based on the new destination
         fish.text = luaUtils.ternary(
             fish.travelPoints[#fish.travelPoints].col > fish.position.col,
-            RIGHT_FACING_FISH,
-            LEFT_FACING_FISH
+            constants.RIGHT_FACING_FISH,
+            constants.LEFT_FACING_FISH
         )
     end
 
@@ -236,7 +221,7 @@ M.showFishtank = function(args)
     })
 
     -- start interval and set global ID
-    intervalID = vimUtils.setInterval(POINT_TRAVEL_TIME, function()
+    intervalID = vimUtils.setInterval(constants.POINT_TRAVEL_TIME, function()
         updateFish()
         updateFishtank()
     end)
@@ -248,13 +233,15 @@ M.fishtankUserCommand = function(args)
 
     -- take action based on first argument
     if splitResult.first == 'start' then
-        vim.print('TODO start')
+        showFishtank()
     elseif splitResult.first == 'stop' then
-        vim.print('TODO stop')
+        hideFishtank()
     elseif splitResult.first == 'toggle' then
         vim.print('TODO toggle')
     else
-        vim.print('Invalid :Fishtank command. See `:h fishtank` for details.')
+        vim.print(
+            'Invalid Fishtank.nvim command. See `:h fishtank` for details.'
+        )
     end
 end
 
