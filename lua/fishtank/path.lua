@@ -5,7 +5,7 @@ local vimUtils = require('fishtank.util.vim')
 local M = {}
 
 -- generate a random position in the editor
-local randomPosition = function()
+M.randomPosition = function()
     local editorSize = vimUtils.getEditorSize()
     return {
         row = math.floor(math.random(editorSize.rows)),

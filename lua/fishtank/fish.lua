@@ -18,9 +18,9 @@ function Fish:new(o)
 end
 
 -- creates and returns a new fish
-function Fish:initialize(self)
+function Fish:initialize()
     -- select a random position
-    self.position = randomPosition()
+    self.position = path.randomPosition()
 
     -- create an unlisted scratch buffer
     self.bufferID = vim.api.nvim_create_buf(false, true)
@@ -53,7 +53,7 @@ function Fish:initialize(self)
 end
 
 -- updates a fish's position
-function Fish:update(self)
+function Fish:update()
     -- if the fish has no planned route, create a new one
     if #self.travelPoints == 0 then
         -- get a new route
@@ -73,7 +73,7 @@ function Fish:update(self)
 end
 
 -- closes a fish's window
-function Fish:close(self)
+function Fish:close()
     vim.api.nvim_win_close(self.windowID, true)
     self.bufferID = nil
     self.windowID = nil
