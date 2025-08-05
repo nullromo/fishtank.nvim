@@ -10,7 +10,7 @@ with you until manually dismissed.
 
 https://github.com/user-attachments/assets/37ec96d1-32a6-459f-a286-edd754aa173b
 
-## 🌊 Installation and Configuration
+## 🌊 Installation, Usage, and Configuration
 
 Lazy.nvim config:
 
@@ -24,6 +24,14 @@ Lazy.nvim config:
     end,
 }
 ```
+
+### User Command
+
+There is one user command, `:Fishtank`. It accepts the following arguments:
+
+- `start`, `on`, `open`, or `show` : shows the fishtank manually.
+- `stop`, `off`, `close`, or `hide` : shows the fishtank manually.
+- `toggle` : shows the fishtank if it is hidden; otherwise hides it.
 
 ### Default Options
 
