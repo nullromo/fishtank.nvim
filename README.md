@@ -30,7 +30,7 @@ Lazy.nvim config:
 There is one user command, `:Fishtank`. It accepts the following arguments:
 
 - `start`, `on`, `open`, or `show` : shows the fishtank manually.
-- `stop`, `off`, `close`, or `hide` : shows the fishtank manually.
+- `stop`, `off`, `close`, or `hide` : hides the fishtank manually.
 - `toggle` : shows the fishtank if it is hidden; otherwise hides it.
 
 ### Default Options
