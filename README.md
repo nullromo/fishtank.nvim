@@ -8,7 +8,7 @@ The fish will appear automatically after a given amount of time, and disappear
 whenever you do something. Or if you choose to show it manually, it will stay
 with you until manually dismissed.
 
-https://github.com/user-attachments/assets/37ec96d1-32a6-459f-a286-edd754aa173b
+https://github.com/user-attachments/assets/e58915f4-8e6d-40ad-92a3-1f0b271a337b
 
 ## 🌊 Installation, Usage, and Configuration
 
