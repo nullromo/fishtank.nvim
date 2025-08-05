@@ -49,6 +49,7 @@ M.setupScreensaver = function()
             'WinResized',
         }, {
             callback = vim.schedule_wrap(function()
+                internals.hideFishtank()
                 internals.initializeScreensaver()
             end),
             group = fishtankAugroup,
