@@ -4,6 +4,8 @@ A little friend to keep you company.
 
 ## 🐠 Video Demo
 
+https://github.com/user-attachments/assets/37ec96d1-32a6-459f-a286-edd754aa173b
+
 ## 🌊 Installation and Configuration
 
 Lazy.nvim config:
