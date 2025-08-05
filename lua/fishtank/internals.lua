@@ -134,9 +134,9 @@ M.initializeScreensaver = function()
     globalState.screensaverTimer:start(
         options.opts.screensaver.timeout,
         0,
-        function()
+        vim.schedule_wrap(function()
             M.showFishtank({ state = constants.FISHTANK_SHOWN_BY_TIMER })
-        end
+        end)
     )
 end
 
