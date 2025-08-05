@@ -100,8 +100,7 @@ M.showFishtank = function(args)
 end
 
 M.toggleFishtank = function()
-    vim.print(globalState.state)
-    if globalState.state == FISHTANK_HIDDEN then
+    if globalState.state == constants.FISHTANK_HIDDEN then
         M.showFishtank()
     else
         M.hideFishtank()
