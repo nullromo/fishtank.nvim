@@ -10,6 +10,7 @@ M.setup = function(opts)
     -- setup
     setup.setupUserCommand()
     setup.setupAutocommands()
+    setup.setupScreensaver()
 end
 
 return M

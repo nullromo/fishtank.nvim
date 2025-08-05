@@ -2,6 +2,7 @@ local Fish = require('fishtank.fish')
 local constants = require('fishtank.constants')
 local luaUtils = require('fishtank.util.lua')
 local mathUtils = require('fishtank.util.math')
+local options = require('fishtank.options')
 local vimUtils = require('fishtank.util.vim')
 
 local M = {}
@@ -12,6 +13,7 @@ local globalState = {
     intervalID = nil,
     state = constants.FISHTANK_HIDDEN,
     paused = false,
+    screensaverTimer = nil,
 }
 
 -- initializes the fishList data
@@ -94,7 +96,7 @@ M.showFishtank = function(args)
         end
     )
 
-    globalState.state = constants.FISHTANK_SHOWN_BY_USER
+    globalState.state = args.state or constants.FISHTANK_SHOWN_BY_USER
 end
 
 M.fishtankUserCommand = function(args)
@@ -120,6 +122,22 @@ M.pauseFishtank = function()
 end
 M.resumeFishtank = function()
     globalState.paused = false
+end
+
+M.initializeScreensaver = function()
+    -- create timer if it doesn't exist
+    if globalState.screensaverTimer == nil then
+        globalState.screensaverTimer = uv.new_timer()
+    end
+
+    -- start the timer
+    globalState.screensaverTimer:start(
+        options.opts.screensaver.timeout,
+        0,
+        function()
+            M.showFishtank({ state = constants.FISHTANK_SHOWN_BY_TIMER })
+        end
+    )
 end
 
 return M

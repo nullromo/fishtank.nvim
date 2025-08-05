@@ -30,8 +30,31 @@ M.setupAutocommands = function()
         group = fishtankAugroup,
         desc = 'resume fishtank.nvim when done typing a command',
     })
+end
 
-    vim.print(options.opts)
+M.setupScreensaver = function()
+    if options.screensaver.enabled then
+        -- start the screensaver timer
+        internals.initializeScreensaver()
+
+        -- whenever the user does anything, restart the screensaver timer
+        vim.api.nvim_create_autocmd({
+            'CursorMoved',
+            'CursorMovedC',
+            'CursorMovedI',
+            'FocusGained',
+            'ModeChanged',
+            'InsertCharPre',
+            'WinScrolled',
+            'WinResized',
+        }, {
+            callback = function()
+                internals.initializeScreensaver()
+            end,
+            group = fishtankAugroup,
+            desc = 'restart fishtank.nvim screensaver timer when not idle',
+        })
+    end
 end
 
 return M
