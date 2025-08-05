@@ -76,6 +76,8 @@ Also, VSCode users
 [have this kind of thing](https://marketplace.visualstudio.com/items?itemName=tonybaloney.vscode-pets),
 so why can't we have it too? 😄
 
+Partly inspired by [drop.nvim](https://github.com/folke/drop.nvim).
+
 ## 🎣 Donating
 
 To say thanks, [sponsor me on GitHub](https://github.com/sponsors/nullromo) or
