@@ -100,6 +100,7 @@ M.showFishtank = function(args)
 end
 
 M.toggleFishtank = function()
+    vim.print(globalState.state)
     if globalState.state == FISHTANK_HIDDEN then
         M.showFishtank()
     else
@@ -116,12 +117,14 @@ M.fishtankUserCommand = function(args)
         splitResult.first == 'start'
         or splitResult.first == 'on'
         or splitResult.first == 'open'
+        or splitResult.first == 'show'
     then
         M.showFishtank()
     elseif
         splitResult.first == 'stop'
         or splitResult.first == 'off'
         or splitResult.first == 'close'
+        or splitResult.first == 'hide'
     then
         M.hideFishtank()
     elseif splitResult.first == 'toggle' then
