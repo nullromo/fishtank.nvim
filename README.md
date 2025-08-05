@@ -4,6 +4,10 @@ A little friend to keep you company.
 
 ## 🐠 Video Demo
 
+The fish will appear automatically after a given amount of time, and disappear
+whenever you do something. Or if you choose to show it manually, it will stay
+with you until manually dismissed.
+
 https://github.com/user-attachments/assets/37ec96d1-32a6-459f-a286-edd754aa173b
 
 ## 🌊 Installation and Configuration
