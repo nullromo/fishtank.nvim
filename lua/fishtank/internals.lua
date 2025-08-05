@@ -96,7 +96,7 @@ M.showFishtank = function(args)
         end
     )
 
-    globalState.state = args.state or constants.FISHTANK_SHOWN_BY_USER
+    globalState.state = (args or {}).state or constants.FISHTANK_SHOWN_BY_USER
 end
 
 M.fishtankUserCommand = function(args)
