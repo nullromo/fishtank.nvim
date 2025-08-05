@@ -127,7 +127,7 @@ end
 M.initializeScreensaver = function()
     -- create timer if it doesn't exist
     if globalState.screensaverTimer == nil then
-        globalState.screensaverTimer = uv.new_timer()
+        globalState.screensaverTimer = vim.uv.new_timer()
     end
 
     -- start the timer
