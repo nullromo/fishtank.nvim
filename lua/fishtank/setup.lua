@@ -49,8 +49,7 @@ M.setupScreensaver = function()
             'WinResized',
         }, {
             callback = vim.schedule_wrap(function()
-                internals.hideFishtank()
-                internals.initializeScreensaver()
+                internals.userNotIdle()
             end),
             group = fishtankAugroup,
             desc = 'restart fishtank.nvim screensaver timer when not idle',

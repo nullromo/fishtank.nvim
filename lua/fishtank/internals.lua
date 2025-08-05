@@ -124,13 +124,7 @@ M.resumeFishtank = function()
     globalState.paused = false
 end
 
-M.initializeScreensaver = function()
-    -- create timer if it doesn't exist
-    if globalState.screensaverTimer == nil then
-        globalState.screensaverTimer = vim.uv.new_timer()
-    end
-
-    -- start the timer
+local startScreensaverTimer = function()
     globalState.screensaverTimer:start(
         options.opts.screensaver.timeout,
         0,
@@ -138,6 +132,25 @@ M.initializeScreensaver = function()
             M.showFishtank({ state = constants.FISHTANK_SHOWN_BY_TIMER })
         end)
     )
+end
+
+M.initializeScreensaver = function()
+    -- create timer if it doesn't exist
+    if globalState.screensaverTimer == nil then
+        globalState.screensaverTimer = vim.uv.new_timer()
+    end
+
+    startScreensaverTimer()
+end
+
+M.userNotIdle = function()
+    -- if the screensaver is on, turn it off
+    if globalState.state == constants.FISHTANK_SHOWN_BY_TIMER then
+        M.hideFishtank()
+    end
+
+    -- restart the screensaver timer
+    startScreensaverTimer()
 end
 
 return M
