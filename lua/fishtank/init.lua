@@ -1,4 +1,3 @@
-local internals = require('fishtank.internals')
 local options = require('fishtank.options')
 local setup = require('fishtank.setup')
 

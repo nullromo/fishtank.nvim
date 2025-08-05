@@ -1,3 +1,4 @@
+local internals = require('fishtank.internals')
 local options = require('fishtank.options')
 
 local M = {}
