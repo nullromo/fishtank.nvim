@@ -33,7 +33,7 @@ M.setupAutocommands = function()
 end
 
 M.setupScreensaver = function()
-    if options.screensaver.enabled then
+    if options.opts.screensaver.enabled then
         -- start the screensaver timer
         internals.initializeScreensaver()
 
