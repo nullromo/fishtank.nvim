@@ -56,7 +56,17 @@ I am very open to feedback and criticism.
 ## 🪼 Special Thanks
 
 - 🏅
-  [`<Your name here>`](https://github.com/nullromo/go-up.nvim/blob/main/README.md#-donating)
+  [`<Your name here>`](https://github.com/nullromo/fishtank.nvim/blob/main/README.md#-donating)
+
+### Inspiration
+
+This plugin was inspired by a program I wrote on a
+[TI-84 Plus Silver Edition graphing calculator](https://en.wikipedia.org/wiki/TI-84_Plus_series)
+in high school.
+
+Also, VSCode users
+[have this kind of thing](https://marketplace.visualstudio.com/items?itemName=tonybaloney.vscode-pets),
+so why can't we have it too? 😄
 
 ## 🎣 Donating
 
