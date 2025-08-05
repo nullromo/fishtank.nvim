@@ -104,9 +104,17 @@ M.fishtankUserCommand = function(args)
     local splitResult = luaUtils.splitFirstToken(args)
 
     -- take action based on first argument
-    if splitResult.first == 'start' then
+    if
+        splitResult.first == 'start'
+        or splitResult.first == 'on'
+        or splitResult.first == 'open'
+    then
         M.showFishtank()
-    elseif splitResult.first == 'stop' then
+    elseif
+        splitResult.first == 'stop'
+        or splitResult.first == 'off'
+        or splitResult.first == 'close'
+    then
         M.hideFishtank()
     elseif splitResult.first == 'toggle' then
         vim.print('TODO toggle')
