@@ -99,6 +99,14 @@ M.showFishtank = function(args)
     globalState.state = (args or {}).state or constants.FISHTANK_SHOWN_BY_USER
 end
 
+M.toggleFishtank = function()
+    if globalState.state == FISHTANK_HIDDEN then
+        M.showFishtank()
+    else
+        M.hideFishtank()
+    end
+end
+
 M.fishtankUserCommand = function(args)
     -- split arguments
     local splitResult = luaUtils.splitFirstToken(args)
@@ -117,7 +125,7 @@ M.fishtankUserCommand = function(args)
     then
         M.hideFishtank()
     elseif splitResult.first == 'toggle' then
-        vim.print('TODO toggle')
+        M.toggleFishtank()
     else
         vim.print(
             'Invalid Fishtank.nvim command. See `:h fishtank` for details.'
