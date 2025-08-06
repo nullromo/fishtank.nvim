@@ -3,6 +3,7 @@ local constants = require('fishtank.constants')
 local luaUtils = require('fishtank.util.lua')
 local options = require('fishtank.options')
 local path = require('fishtank.path')
+local vimUtils = require('fishtank.util.vim')
 
 Fish = {
     position = { row = 0, col = 0 },
@@ -49,6 +50,7 @@ function Fish:initialize()
         zindex = 999,
         style = 'minimal',
         noautocmd = true,
+        border = '',
     })
 
     -- set the window's highlight namespace
@@ -95,7 +97,10 @@ end
 
 -- closes a fish's window
 function Fish:close()
-    vim.api.nvim_win_close(self.windowID, true)
+    if vim.api.nvim_win_is_valid(self.windowID) then
+        vim.api.nvim_win_close(self.windowID, true)
+    end
+
     self.bufferID = nil
     self.windowID = nil
 end
