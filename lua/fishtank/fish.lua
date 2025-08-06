@@ -40,6 +40,7 @@ function Fish:initialize()
         zindex = 999,
         style = 'minimal',
         noautocmd = true,
+        border = '',
     })
 
     -- select a random direction
