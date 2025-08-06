@@ -1,8 +1,5 @@
 local M = {}
 
-M.RIGHT_FACING_FISH = '><>' -- fish moving to the right
-M.LEFT_FACING_FISH = '<><' -- fish moving to the left
-
 -- time to wait between updates
 M.POINT_TRAVEL_TIME = 100 -- milliseconds per point (ms/pt)
 

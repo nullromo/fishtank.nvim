@@ -1,5 +1,6 @@
 local constants = require('fishtank.constants')
 local luaUtils = require('fishtank.util.lua')
+local options = require('fishtank.options')
 local path = require('fishtank.path')
 
 Fish = {
@@ -45,8 +46,8 @@ function Fish:initialize()
     -- select a random direction
     self.text = luaUtils.ternary(
         math.random(2) == 1,
-        constants.RIGHT_FACING_FISH,
-        constants.LEFT_FACING_FISH
+        options.opts.screensaver.sprite.right,
+        options.opts.screensaver.sprite.left
     )
 
     -- clear travel points
@@ -63,8 +64,8 @@ function Fish:update()
         -- update the fish's facing position based on the new destination
         self.text = luaUtils.ternary(
             self.travelPoints[#self.travelPoints].col > self.position.col,
-            constants.RIGHT_FACING_FISH,
-            constants.LEFT_FACING_FISH
+            options.opts.screensaver.sprite.right,
+            options.opts.screensaver.sprite.left
         )
     end
 
