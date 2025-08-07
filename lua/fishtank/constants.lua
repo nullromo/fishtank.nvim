@@ -24,4 +24,5 @@ M.EXHAUSTION_FACTOR = 3 -- amount to scale delay by based on speed
 M.FISHTANK_HIDDEN = 'hidden'
 M.FISHTANK_SHOWN_BY_USER = 'shown by user'
 M.FISHTANK_SHOWN_BY_TIMER = 'shown by timer'
+
 return M

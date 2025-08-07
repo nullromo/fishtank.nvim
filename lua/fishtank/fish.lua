@@ -42,6 +42,21 @@ function Fish:initialize()
         noautocmd = true,
     })
 
+    -- set the window's highlight namespace
+    vim.api.nvim_win_set_hl_ns(self.windowID, constants.highlightNamespace)
+
+    -- if anything changed about the colorscheme since the Fish highlight was
+    -- created, it may have the wrong background color. Update it here
+    vim.api.nvim_set_hl(constants.highlightNamespace, 'Fish', {
+        fg = '#FFFFFF',
+        bg = vim.api.nvim_get_hl(0, { name = 'Normal' }).bg,
+        bold = true,
+        force = true,
+    })
+    -- NOTE: transparent background would be ideal, but using this causes the
+    -- foreground to also blend with what's behind it
+    --vim.api.nvim_set_option_value('winblend', 100, { win = self.windowID })
+
     -- select a random direction
     self.text = luaUtils.ternary(
         math.random(2) == 1,
