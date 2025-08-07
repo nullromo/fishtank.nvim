@@ -29,10 +29,17 @@ function Fish:initialize()
     -- wipe the buffer when it is hidden
     vim.api.nvim_buf_set_var(self.bufferID, 'bufhidden', 'wipe')
 
+    -- select a random direction
+    self.text = luaUtils.ternary(
+        math.random(2) == 1,
+        options.opts.screensaver.sprite.right,
+        options.opts.screensaver.sprite.left
+    )
+
     -- create a floating window and set the global window ID
     self.windowID = vim.api.nvim_open_win(self.bufferID, false, {
         relative = 'editor',
-        width = 3,
+        width = #self.text,
         height = 1,
         row = self.position.row,
         col = self.position.col,
@@ -42,13 +49,6 @@ function Fish:initialize()
         style = 'minimal',
         noautocmd = true,
     })
-
-    -- select a random direction
-    self.text = luaUtils.ternary(
-        math.random(2) == 1,
-        options.opts.screensaver.sprite.right,
-        options.opts.screensaver.sprite.left
-    )
 
     -- clear travel points
     self.travelPoints = {}
@@ -67,6 +67,8 @@ function Fish:update()
             options.opts.screensaver.sprite.right,
             options.opts.screensaver.sprite.left
         )
+
+        vim.api.nvim_win_set_width(self.windowID, #self.text)
     end
 
     -- pop the first position in the route and move the fish there
