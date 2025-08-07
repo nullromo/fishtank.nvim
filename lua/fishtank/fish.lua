@@ -1,3 +1,4 @@
+local colors = require('fishtank.colors')
 local constants = require('fishtank.constants')
 local luaUtils = require('fishtank.util.lua')
 local path = require('fishtank.path')
@@ -43,11 +44,11 @@ function Fish:initialize()
     })
 
     -- set the window's highlight namespace
-    vim.api.nvim_win_set_hl_ns(self.windowID, constants.highlightNamespace)
+    vim.api.nvim_win_set_hl_ns(self.windowID, colors.highlightNamespace)
 
     -- if anything changed about the colorscheme since the Fish highlight was
     -- created, it may have the wrong background color. Update it here
-    vim.api.nvim_set_hl(constants.highlightNamespace, 'Fish', {
+    vim.api.nvim_set_hl(colors.highlightNamespace, 'Fish', {
         fg = '#FFFFFF',
         bg = vim.api.nvim_get_hl(0, { name = 'Normal' }).bg,
         bold = true,

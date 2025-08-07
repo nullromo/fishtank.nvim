@@ -1,4 +1,5 @@
 local Fish = require('fishtank.fish')
+local colors = require('fishtank.colors')
 local constants = require('fishtank.constants')
 local luaUtils = require('fishtank.util.lua')
 local mathUtils = require('fishtank.util.math')
@@ -55,7 +56,7 @@ local redrawFishtank = function()
         --vim.api.nvim_buf_set_lines(fish.bufferID, 0, 1, false, { fish.text })
         vim.api.nvim_buf_set_extmark(
             fish.bufferID,
-            constants.highlightNamespace,
+            colors.highlightNamespace,
             0,
             0,
             {
