@@ -1,4 +1,5 @@
 local Fish = require('fishtank.fish')
+local colors = require('fishtank.colors')
 local constants = require('fishtank.constants')
 local luaUtils = require('fishtank.util.lua')
 local mathUtils = require('fishtank.util.math')
@@ -50,7 +51,20 @@ local redrawFishtank = function()
         })
 
         -- update the fish text
-        vim.api.nvim_buf_set_lines(fish.bufferID, 0, 1, false, { fish.text })
+        -- NOTE: this will set the buffer's actual text, but the extmark uses
+        -- the right colors
+        --vim.api.nvim_buf_set_lines(fish.bufferID, 0, 1, false, { fish.text })
+        vim.api.nvim_buf_set_extmark(
+            fish.bufferID,
+            colors.highlightNamespace,
+            0,
+            0,
+            {
+                id = 1,
+                virt_text_pos = 'overlay',
+                virt_text = { { fish.text, 'Fish' } },
+            }
+        )
     end
 end
 
