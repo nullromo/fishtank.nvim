@@ -59,8 +59,8 @@ M.defaultOptions = {
 | -------------------------- | --------- | --------------------- | ---------------------------------------------------------------------- |
 | `screensaver.enabled`      | boolean   | `true`                | Whether or not to turn the fishtank on after an amount of idle time.   |
 | `screensaver.timeout`      | number    | `600000` (10 minutes) | Amount of time in milliseconds to wait before turning the fishtank on. |
-| `screensaver.sprite.right` | number    | `'><>'`               | Sprite to use for the fish when facing right. |
-| `screensaver.sprite.left`  | number    | `'<><'`               | Sprite to use for the fish when facing left. |
+| `screensaver.sprite.right` | string    | `'><>'`               | Sprite to use for the fish when facing right.                          |
+| `screensaver.sprite.left`  | string    | `'<><'`               | Sprite to use for the fish when facing left.                           |
 
 ## 🐡 License, Contributing, etc.
 
