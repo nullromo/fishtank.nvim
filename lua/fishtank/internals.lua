@@ -93,23 +93,22 @@ end
 
 -- turns on the fishtank and initializes the state
 M.showFishtank = function(args)
-    -- if the fishtank is already showing, do nothing
-    if globalState.state ~= constants.FISHTANK_HIDDEN then
-        return
+    -- if the fishtank is not already showing, show it
+    if globalState.state == constants.FISHTANK_HIDDEN then
+        -- initialize the fish
+        initializeFish()
+
+        -- start interval and set global ID
+        globalState.intervalID = vimUtils.setInterval(
+            constants.POINT_TRAVEL_TIME,
+            function()
+                updateAllFish()
+                redrawFishtank()
+            end
+        )
     end
 
-    -- initialize the fish
-    initializeFish()
-
-    -- start interval and set global ID
-    globalState.intervalID = vimUtils.setInterval(
-        constants.POINT_TRAVEL_TIME,
-        function()
-            updateAllFish()
-            redrawFishtank()
-        end
-    )
-
+    -- update the global state
     globalState.state = (args or {}).state or constants.FISHTANK_SHOWN_BY_USER
 end
 
