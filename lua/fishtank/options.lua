@@ -47,7 +47,7 @@ M.validateOptions = function(opts)
                         else
                             error(
                                 '"opts.screensaver.sprite.'
-                                    .. key2
+                                    .. key3
                                     .. '" is not a valid option for fishtank.nvim'
                             )
                         end
