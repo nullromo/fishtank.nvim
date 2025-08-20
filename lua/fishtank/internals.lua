@@ -161,7 +161,11 @@ local startScreensaverTimer = function()
         options.opts.screensaver.timeout,
         0,
         vim.schedule_wrap(function()
-            M.showFishtank({ state = constants.FISHTANK_SHOWN_BY_TIMER })
+            if globalState.state == constants.FISHTANK_HIDDEN then
+                M.showFishtank({
+                    state = constants.FISHTANK_SHOWN_BY_TIMER,
+                })
+            end
         end)
     )
 end
