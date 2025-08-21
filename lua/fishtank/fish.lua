@@ -77,13 +77,14 @@ function Fish:update()
         -- get a new route
         self.travelPoints = path.computeNewPath(self)
 
-        -- update the fish's facing position based on the new destination
+        -- update the fish's sprite based on the new destination
         self.text = luaUtils.ternary(
             self.travelPoints[#self.travelPoints].col > self.position.col,
             options.opts.screensaver.sprite.right,
             options.opts.screensaver.sprite.left
         )
 
+        -- resize the window to fit the new sprite
         vim.api.nvim_win_set_width(self.windowID, #self.text)
     end
 
