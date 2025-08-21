@@ -1,6 +1,7 @@
 local colors = require('fishtank.colors')
 local constants = require('fishtank.constants')
 local luaUtils = require('fishtank.util.lua')
+local options = require('fishtank.options')
 local path = require('fishtank.path')
 
 Fish = {
@@ -29,10 +30,17 @@ function Fish:initialize()
     -- wipe the buffer when it is hidden
     vim.api.nvim_buf_set_var(self.bufferID, 'bufhidden', 'wipe')
 
+    -- select a random direction
+    self.text = luaUtils.ternary(
+        math.random(2) == 1,
+        options.opts.sprite.left,
+        options.opts.sprite.right
+    )
+
     -- create a floating window and set the global window ID
     self.windowID = vim.api.nvim_open_win(self.bufferID, false, {
         relative = 'editor',
-        width = 3,
+        width = #self.text,
         height = 1,
         row = self.position.row,
         col = self.position.col,
@@ -58,13 +66,6 @@ function Fish:initialize()
     -- foreground to also blend with what's behind it
     --vim.api.nvim_set_option_value('winblend', 100, { win = self.windowID })
 
-    -- select a random direction
-    self.text = luaUtils.ternary(
-        math.random(2) == 1,
-        constants.RIGHT_FACING_FISH,
-        constants.LEFT_FACING_FISH
-    )
-
     -- clear travel points
     self.travelPoints = {}
 end
@@ -76,12 +77,15 @@ function Fish:update()
         -- get a new route
         self.travelPoints = path.computeNewPath(self)
 
-        -- update the fish's facing position based on the new destination
+        -- update the fish's sprite based on the new destination
         self.text = luaUtils.ternary(
             self.travelPoints[#self.travelPoints].col > self.position.col,
-            constants.RIGHT_FACING_FISH,
-            constants.LEFT_FACING_FISH
+            options.opts.sprite.right,
+            options.opts.sprite.left
         )
+
+        -- resize the window to fit the new sprite
+        vim.api.nvim_win_set_width(self.windowID, #self.text)
     end
 
     -- pop the first position in the route and move the fish there

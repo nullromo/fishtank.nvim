@@ -15,6 +15,11 @@ M.defaultOptions = {
         -- amount of idle time before the screensaver comes on
         timeout = 60 * 1000 * 10, -- 10 minutes
     },
+    -- sprite customization
+    sprite = {
+        left = '<><', -- fish moving to the left
+        right = '><>', -- fish moving to the right
+    },
 }
 
 M.validateOptions = function(opts)
@@ -28,6 +33,20 @@ M.validateOptions = function(opts)
                 else
                     error(
                         '"opts.screensaver.'
+                            .. key2
+                            .. '" is not a valid option for fishtank.nvim'
+                    )
+                end
+            end
+        elseif key == 'sprite' then
+            for key2, value2 in pairs(value) do
+                if key2 == 'left' then
+                    checkType(value2, 'opts.sprite.left', 'string')
+                elseif key2 == 'right' then
+                    checkType(value2, 'opts.sprite.right', 'string')
+                else
+                    error(
+                        '"opts.sprite.'
                             .. key2
                             .. '" is not a valid option for fishtank.nvim'
                     )
