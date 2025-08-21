@@ -33,8 +33,8 @@ function Fish:initialize()
     -- select a random direction
     self.text = luaUtils.ternary(
         math.random(2) == 1,
-        options.opts.screensaver.sprite.right,
-        options.opts.screensaver.sprite.left
+        options.opts.sprite.left,
+        options.opts.sprite.right
     )
 
     -- create a floating window and set the global window ID
@@ -80,8 +80,8 @@ function Fish:update()
         -- update the fish's sprite based on the new destination
         self.text = luaUtils.ternary(
             self.travelPoints[#self.travelPoints].col > self.position.col,
-            options.opts.screensaver.sprite.right,
-            options.opts.screensaver.sprite.left
+            options.opts.sprite.right,
+            options.opts.sprite.left
         )
 
         -- resize the window to fit the new sprite

@@ -44,23 +44,23 @@ M.defaultOptions = {
         enabled = true,
         -- amount of idle time before the screensaver comes on
         timeout = 60 * 1000 * 10, -- 10 minutes
-        -- sprite customization
-        sprite = {
-            right = '><>', -- fish moving to the right
-            left = '<><', -- fish moving to the left
-        },
+    },
+    -- sprite customization
+    sprite = {
+        left = '<><', -- fish moving to the left
+        right = '><>', -- fish moving to the right
     },
 }
 ```
 
 ### Options Table
 
-| Option                     | Data Type | Default               | Description                                                            |
-| -------------------------- | --------- | --------------------- | ---------------------------------------------------------------------- |
-| `screensaver.enabled`      | boolean   | `true`                | Whether or not to turn the fishtank on after an amount of idle time.   |
-| `screensaver.timeout`      | number    | `600000` (10 minutes) | Amount of time in milliseconds to wait before turning the fishtank on. |
-| `screensaver.sprite.right` | string    | `'><>'`               | Sprite to use for the fish when facing right.                          |
-| `screensaver.sprite.left`  | string    | `'<><'`               | Sprite to use for the fish when facing left.                           |
+| Option                | Data Type | Default               | Description                                                            |
+| --------------------- | --------- | --------------------- | ---------------------------------------------------------------------- |
+| `screensaver.enabled` | boolean   | `true`                | Whether or not to turn the fishtank on after an amount of idle time.   |
+| `screensaver.timeout` | number    | `600000` (10 minutes) | Amount of time in milliseconds to wait before turning the fishtank on. |
+| `sprite.left`         | string    | `'<><'`               | Sprite to use for the fish when facing left.                           |
+| `sprite.right`        | string    | `'><>'`               | Sprite to use for the fish when facing right.                          |
 
 ## 🐡 License, Contributing, etc.
 
