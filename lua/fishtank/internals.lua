@@ -43,6 +43,14 @@ local redrawFishtank = function()
     end
 
     for i, fish in ipairs(globalState.fishList) do
+        -- if the window is somehow closed
+        if not vim.api.nvim_win_is_valid(fish.windowID) then
+            -- TODO: should be made per fish once we have multiple fish support
+            M.hideFishtank()
+            M.userNotIdle()
+            break
+        end
+
         -- move the fishtank window
         vim.api.nvim_win_set_config(fish.windowID, {
             relative = 'editor',
