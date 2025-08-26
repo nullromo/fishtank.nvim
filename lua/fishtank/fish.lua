@@ -52,6 +52,13 @@ function Fish:initialize()
         noautocmd = true,
         border = '',
     })
+    -- ignore any autocommands triggered by this window, such as WinScrolled,
+    -- WinResized, etc.
+    vim.api.nvim_set_option_value(
+        'eventignorewin',
+        'all',
+        { win = self.windowID }
+    )
 
     -- set the window's highlight namespace
     vim.api.nvim_win_set_hl_ns(self.windowID, colors.highlightNamespace)
