@@ -19,6 +19,7 @@ M.defaultOptions = {
     sprite = {
         left = '<><', -- fish moving to the left
         right = '><>', -- fish moving to the right
+        color = '#FFFFFF', -- set the color of the fish
     },
 }
 
@@ -44,6 +45,8 @@ M.validateOptions = function(opts)
                     checkType(value2, 'opts.sprite.left', 'string')
                 elseif key2 == 'right' then
                     checkType(value2, 'opts.sprite.right', 'string')
+                elseif key2 == 'color' then
+                    checkType(value2, 'opts.sprite.color', 'string')
                 else
                     error(
                         '"opts.sprite.'

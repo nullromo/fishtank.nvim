@@ -66,7 +66,7 @@ function Fish:initialize()
     -- if anything changed about the colorscheme since the Fish highlight was
     -- created, it may have the wrong background color. Update it here
     vim.api.nvim_set_hl(colors.highlightNamespace, 'Fish', {
-        fg = '#FFFFFF',
+        fg = options.opts.sprite.color,
         bg = vim.api.nvim_get_hl(0, { name = 'Normal' }).bg,
         bold = true,
         force = true,
