@@ -19,7 +19,7 @@ M.defaultOptions = {
     sprite = {
         left = '<><', -- fish moving to the left
         right = '><>', -- fish moving to the right
-        color = '#FFFFFF', -- set the color of the fish
+        color = '#FFFFFF', -- color of the fish
     },
 }
 
