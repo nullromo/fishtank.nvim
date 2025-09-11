@@ -41,7 +41,7 @@ function Fish:initialize()
     -- create a floating window and set the global window ID
     self.windowID = vim.api.nvim_open_win(self.bufferID, false, {
         relative = 'editor',
-        width = #self.text,
+        width = vim.fn.strdisplaywidth(self.text),
         height = 1,
         row = self.position.row,
         col = self.position.col,
@@ -94,7 +94,10 @@ function Fish:update()
         )
 
         -- resize the window to fit the new sprite
-        vim.api.nvim_win_set_width(self.windowID, #self.text)
+        vim.api.nvim_win_set_width(
+            self.windowID,
+            vim.fn.strdisplaywidth(self.text)
+        )
     end
 
     -- pop the first position in the route and move the fish there
