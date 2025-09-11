@@ -49,6 +49,7 @@ M.defaultOptions = {
     sprite = {
         left = '<><', -- fish moving to the left
         right = '><>', -- fish moving to the right
+        color = '#FFFFFF', -- color of the fish
     },
 }
 ```
@@ -61,6 +62,7 @@ M.defaultOptions = {
 | `screensaver.timeout` | number    | `600000` (10 minutes) | Amount of time in milliseconds to wait before turning the fishtank on. |
 | `sprite.left`         | string    | `'<><'`               | Sprite to use for the fish when facing left.                           |
 | `sprite.right`        | string    | `'><>'`               | Sprite to use for the fish when facing right.                          |
+| `sprite.color`        | string    | `'#FFFFFF'`           | Color of the fish sprite.                                              |
 
 ## 🐡 License, Contributing, etc.
 
