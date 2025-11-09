@@ -14,6 +14,8 @@ M.defaultOptions = {
         enabled = true,
         -- amount of idle time before the screensaver comes on
         timeout = 60 * 1000 * 10, -- 10 minutes
+        -- number of fish shown on screen
+        number_of_fish = 1,
     },
     -- sprite customization
     sprite = {
@@ -31,6 +33,8 @@ M.validateOptions = function(opts)
                     checkType(value2, 'opts.screensaver.enabled', 'boolean')
                 elseif key2 == 'timeout' then
                     checkType(value2, 'opts.screensaver.timeout', 'number')
+                elseif key2 == 'number_of_fish' then
+                    checkType(value2, 'opts.screensaver.number_of_fish', 'number')
                 else
                     error(
                         '"opts.screensaver.'

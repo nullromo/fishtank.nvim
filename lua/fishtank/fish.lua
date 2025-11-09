@@ -1,23 +1,21 @@
 local colors = require('fishtank.colors')
-local constants = require('fishtank.constants')
 local luaUtils = require('fishtank.util.lua')
 local options = require('fishtank.options')
 local path = require('fishtank.path')
-local vimUtils = require('fishtank.util.vim')
 
-Fish = {
-    position = { row = 0, col = 0 },
-    text = '',
-    bufferID = nil,
-    windowID = nil,
-    travelPoints = {},
-}
+Fish = {}
 
 function Fish:new(o)
-    o = o or {}
+    o = o or {
+        position = { row = 0, col = 0 },
+        text = '',
+        bufferID = nil,
+        windowID = nil,
+        travelPoints = {},
+    }
     setmetatable(o, self)
     self.__index = self
-    self:initialize()
+    o:initialize()
     return o
 end
 
@@ -50,7 +48,7 @@ function Fish:initialize()
         zindex = 999,
         style = 'minimal',
         noautocmd = true,
-        border = '',
+        border = 'none',
     })
     -- ignore any autocommands triggered by this window, such as WinScrolled,
     -- WinResized, etc.
