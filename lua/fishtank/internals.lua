@@ -2,7 +2,6 @@ local Fish = require('fishtank.fish')
 local colors = require('fishtank.colors')
 local constants = require('fishtank.constants')
 local luaUtils = require('fishtank.util.lua')
-local mathUtils = require('fishtank.util.math')
 local options = require('fishtank.options')
 local vimUtils = require('fishtank.util.vim')
 
@@ -47,7 +46,7 @@ local updateAllFish = function()
     end
 
     -- update all fish in the fishList
-    for i, fish in ipairs(globalState.fishList) do
+    for _, fish in ipairs(globalState.fishList) do
         fish:update()
     end
 end
@@ -60,7 +59,7 @@ local redrawFishtank = function()
         return
     end
 
-    for i, fish in ipairs(globalState.fishList) do
+    for _, fish in ipairs(globalState.fishList) do
         -- if the window is somehow closed
         if not vim.api.nvim_win_is_valid(fish.windowID) then
             -- TODO: should be made per fish once we have multiple fish support
@@ -97,7 +96,7 @@ end
 -- closes all the fish's windows
 ---@return nil
 local closeAllFishWindows = function()
-    for i, fish in ipairs(globalState.fishList) do
+    for _, fish in ipairs(globalState.fishList) do
         fish:close()
     end
 end
