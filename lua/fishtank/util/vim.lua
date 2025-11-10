@@ -35,8 +35,12 @@ end
 ---@return { rows: integer, cols: integer }
 M.getEditorSize = function()
     return {
-        rows = tonumber(vim.api.nvim_command_output('echo &lines')) or 0,
-        cols = tonumber(vim.api.nvim_command_output('echo &columns')) or 0,
+        rows = tonumber(
+            vim.api.nvim_exec2('echo &lines', { output = true }).output
+        ) or 0,
+        cols = tonumber(
+            vim.api.nvim_exec2('echo &columns', { output = true }).output
+        ) or 0,
     }
 end
 
