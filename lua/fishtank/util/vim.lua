@@ -10,6 +10,9 @@ local M = {}
 ---@return uv.uv_timer_t
 M.setInterval = function(interval, callback)
     local timer = vim.uv.new_timer()
+    if timer == nil then
+        error('Fishtank.nvim could not initialize a timer')
+    end
     timer:start(
         interval,
         interval,
