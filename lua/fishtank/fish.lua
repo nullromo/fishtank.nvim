@@ -3,8 +3,15 @@ local luaUtils = require('fishtank.util.lua')
 local options = require('fishtank.options')
 local path = require('fishtank.path')
 
+---@class Fish
+---@field position Point
+---@field text string
+---@field bufferID integer?
+---@field windowID integer?
+---@field travelPoints Point[]
 Fish = {}
 
+---@return Fish
 function Fish:new(o)
     o = o
         or {
@@ -21,6 +28,7 @@ function Fish:new(o)
 end
 
 -- creates and returns a new fish
+---@return nil
 function Fish:initialize()
     -- select a random position
     self.position = path.randomPosition()
@@ -79,6 +87,7 @@ function Fish:initialize()
 end
 
 -- updates a fish's position
+---@return nil
 function Fish:update()
     -- if the fish has no planned route, create a new one
     if #self.travelPoints == 0 then
@@ -105,6 +114,7 @@ function Fish:update()
 end
 
 -- closes a fish's window
+---@return nil
 function Fish:close()
     if vim.api.nvim_win_is_valid(self.windowID) then
         vim.api.nvim_win_close(self.windowID, true)

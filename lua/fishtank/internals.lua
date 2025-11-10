@@ -8,7 +8,16 @@ local vimUtils = require('fishtank.util.vim')
 
 local M = {}
 
+---@alias FishtankGlobalState {
+---    fishList: Fish[],
+---    intervalID: uv.uv_timer_t | nil,
+---    state: FishtankState,
+---    paused: boolean,
+---    screensaverTimer: uv.uv_timer_t | nil,
+---}
+
 -- global state
+---@type FishtankGlobalState
 local globalState = {
     fishList = {},
     intervalID = nil,
@@ -18,6 +27,7 @@ local globalState = {
 }
 
 -- initializes the fishList data
+---@return nil
 local initializeFish = function()
     local fishList = {}
     for _ = 1, options.opts.numberOfFish do
@@ -28,6 +38,8 @@ local initializeFish = function()
     globalState.fishList = fishList
 end
 
+-- updates all fish
+---@return nil
 local updateAllFish = function()
     -- do nothing if paused
     if globalState.paused then
@@ -41,6 +53,7 @@ local updateAllFish = function()
 end
 
 -- redraws all the fish
+---@return nil
 local redrawFishtank = function()
     -- do nothing if the fishtank is not showing
     if globalState.state == constants.FISHTANK_HIDDEN then
@@ -82,6 +95,7 @@ local redrawFishtank = function()
 end
 
 -- closes all the fish's windows
+---@return nil
 local closeAllFishWindows = function()
     for i, fish in ipairs(globalState.fishList) do
         fish:close()
@@ -89,6 +103,7 @@ local closeAllFishWindows = function()
 end
 
 -- turns off the fishtank and wipes the state
+---@return nil
 M.hideFishtank = function()
     -- if the fishtank is not showing, do nothing
     if globalState.state == constants.FISHTANK_HIDDEN then
@@ -105,6 +120,8 @@ M.hideFishtank = function()
 end
 
 -- turns on the fishtank and initializes the state
+---@param args? { state: FishtankState }
+---@return nil
 M.showFishtank = function(args)
     -- if the fishtank is not already showing, show it
     if globalState.state == constants.FISHTANK_HIDDEN then
@@ -125,6 +142,8 @@ M.showFishtank = function(args)
     globalState.state = (args or {}).state or constants.FISHTANK_SHOWN_BY_USER
 end
 
+-- shows or hides the fish
+---@return nil
 M.toggleFishtank = function()
     if globalState.state == constants.FISHTANK_HIDDEN then
         M.showFishtank()
@@ -133,6 +152,9 @@ M.toggleFishtank = function()
     end
 end
 
+-- handles the :Fishtank user command
+---@param args string
+---@return nil
 M.fishtankUserCommand = function(args)
     -- split arguments
     local splitResult = luaUtils.splitFirstToken(args)
@@ -161,13 +183,20 @@ M.fishtankUserCommand = function(args)
     end
 end
 
+-- pauses fish updates
+---@return nil
 M.pauseFishtank = function()
     globalState.paused = true
 end
+
+-- resumes fish updates
+---@return nil
 M.resumeFishtank = function()
     globalState.paused = false
 end
 
+-- starts the screensaver timer
+---@return nil
 local startScreensaverTimer = function()
     globalState.screensaverTimer:start(
         options.opts.screensaver.timeout,
@@ -182,6 +211,8 @@ local startScreensaverTimer = function()
     )
 end
 
+-- initializes the screensaver timer
+---@return nil
 M.initializeScreensaver = function()
     -- create timer if it doesn't exist
     if globalState.screensaverTimer == nil then
@@ -191,6 +222,8 @@ M.initializeScreensaver = function()
     startScreensaverTimer()
 end
 
+-- called when the user does something that interrupts the screensaver
+---@return nil
 M.userNotIdle = function()
     -- if the screensaver is on, turn it off
     if globalState.state == constants.FISHTANK_SHOWN_BY_TIMER then

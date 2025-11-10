@@ -1,6 +1,13 @@
 local M = {}
 
+---@alias VimAugroup integer
+
+---@alias VimNamespace integer
+
 -- set up a function to be called every n milliseconds
+---@param interval integer
+---@param callback fun(): nil
+---@return uv.uv_timer_t
 M.setInterval = function(interval, callback)
     local timer = vim.uv.new_timer()
     timer:start(
@@ -14,12 +21,15 @@ M.setInterval = function(interval, callback)
 end
 
 -- clear a previously set interval
+---@param timer uv.uv_timer_t
+---@return nil
 M.clearInterval = function(timer)
     timer:stop()
     timer:close()
 end
 
 -- determine size of editor
+---@return { rows: integer, cols: integer }
 M.getEditorSize = function()
     return {
         rows = tonumber(vim.api.nvim_command_output('echo &lines')) or 0,

@@ -1,12 +1,30 @@
 local M = {}
 
+---@param value unknown
+---@param valueName string
+---@param typeName string
+---@return nil
 local checkType = function(value, valueName, typeName)
     if type(value) ~= typeName then
         error(valueName .. ' must be a ' .. typeName .. ' for fishtank.nvim')
     end
 end
 
+---@alias FishtankOptions {
+---    screensaver: {
+---        enabled: boolean,
+---        timeout: integer,
+---    },
+---    sprite: {
+---        left: string,
+---        right: string,
+---        color: string,
+---    },
+---    numberOfFish: integer,
+---}
+
 -- default options if unspecified by user
+---@type FishtankOptions
 M.defaultOptions = {
     -- options for controlling the behavior of the screensaver
     screensaver = {
@@ -25,10 +43,14 @@ M.defaultOptions = {
     numberOfFish = 1,
 }
 
+---@param opts FishtankOptions
+---@return nil
 M.validateOptions = function(opts)
     for key, value in pairs(opts) do
         if key == 'screensaver' then
-            for key2, value2 in pairs(value) do
+            for key2, value2 in
+                pairs(value --[[@as { enabled: boolean, timeout: integer }]])
+            do
                 if key2 == 'enabled' then
                     checkType(value2, 'opts.screensaver.enabled', 'boolean')
                 elseif key2 == 'timeout' then
@@ -42,7 +64,11 @@ M.validateOptions = function(opts)
                 end
             end
         elseif key == 'sprite' then
-            for key2, value2 in pairs(value) do
+            for key2, value2 in
+                pairs(
+                    value --[[@as { left: string, right: string, color: string }]]
+                )
+            do
                 if key2 == 'left' then
                     checkType(value2, 'opts.sprite.left', 'string')
                 elseif key2 == 'right' then
@@ -68,8 +94,11 @@ M.validateOptions = function(opts)
 end
 
 -- actual options for use throughout the plugin
+---@type FishtankOptions
 M.opts = vim.tbl_deep_extend('keep', {}, M.defaultOptions)
 
+---@param opts FishtankOptions
+---@return nil
 M.setOptions = function(opts)
     opts = vim.tbl_deep_extend('keep', opts or {}, M.defaultOptions)
     M.validateOptions(opts)

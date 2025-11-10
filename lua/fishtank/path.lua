@@ -5,6 +5,7 @@ local vimUtils = require('fishtank.util.vim')
 local M = {}
 
 -- generate a random position in the editor
+---@return Point
 M.randomPosition = function()
     local editorSize = vimUtils.getEditorSize()
     return {
@@ -14,6 +15,9 @@ M.randomPosition = function()
 end
 
 -- generates a smooth set of points between start and end
+---@param start Point
+---@param finish Point
+---@return Point[]
 local sinspace = function(start, finish)
     -- compute distance scale based on maximum possible travel distance
     local editorSize = vimUtils.getEditorSize()
@@ -60,6 +64,7 @@ local sinspace = function(start, finish)
     local colDistance = finish.col - start.col
 
     -- fill in points array
+    ---@type Point[]
     local points = {}
     for i, point in ipairs(sinValues) do
         points[i] = {
@@ -81,6 +86,8 @@ end
 
 -- determine a new destination point and generate a list of points to
 -- travel along to get to that point
+---@param fish Fish
+---@return Point[]
 M.computeNewPath = function(fish)
     local destination = M.randomPosition()
     return sinspace(fish.position, destination)

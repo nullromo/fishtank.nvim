@@ -3,15 +3,18 @@ local options = require('fishtank.options')
 
 local M = {}
 
+---@type VimAugroup
 local fishtankAugroup =
     vim.api.nvim_create_augroup('fishtank.nvim', { clear = true })
 
+---@return nil
 M.setupUserCommand = function()
     vim.api.nvim_create_user_command('Fishtank', function(opts)
         internals.fishtankUserCommand(opts.args)
     end, { nargs = '+', desc = 'Start fishtank.nvim' })
 end
 
+---@return nil
 M.setupAutocommands = function()
     -- handle cmdline
     vim.api.nvim_create_autocmd({ 'CmdlineEnter' }, {
@@ -32,6 +35,7 @@ M.setupAutocommands = function()
     })
 end
 
+---@return nil
 M.setupScreensaver = function()
     if options.opts.screensaver.enabled then
         -- start the screensaver timer
