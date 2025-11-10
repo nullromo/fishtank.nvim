@@ -20,7 +20,7 @@ local globalState = {
 -- initializes the fishList data
 local initializeFish = function()
     local fishList = {}
-    for _=1,options.opts.screensaver.number_of_fish do
+    for _=1,options.opts.number_of_fish do
         table.insert(fishList, Fish:new())
     end
 
