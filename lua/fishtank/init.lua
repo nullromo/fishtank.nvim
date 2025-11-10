@@ -3,6 +3,8 @@ local setup = require('fishtank.setup')
 
 local M = {}
 
+---@param opts FishtankOptions
+---@return nil
 M.setup = function(opts)
     -- set user options
     options.setOptions(opts)

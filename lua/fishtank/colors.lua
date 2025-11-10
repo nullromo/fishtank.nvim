@@ -3,6 +3,7 @@ local options = require('fishtank.options')
 local M = {}
 
 -- namespace for fishtank.nvim highlights
+---@type VimNamespace
 M.highlightNamespace = vim.api.nvim_create_namespace('fishtank.nvim')
 
 -- create Fish highlight group
