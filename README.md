@@ -51,6 +51,8 @@ M.defaultOptions = {
         right = '><>', -- fish moving to the right
         color = '#FFFFFF', -- color of the fish
     },
+    -- number of fish shown on the screen
+    numberOfFish = 1,
 }
 ```
 
@@ -63,6 +65,7 @@ M.defaultOptions = {
 | `sprite.left`         | string    | `'<><'`               | Sprite to use for the fish when facing left.                           |
 | `sprite.right`        | string    | `'><>'`               | Sprite to use for the fish when facing right.                          |
 | `sprite.color`        | string    | `'#FFFFFF'`           | Color of the fish sprite.                                              |
+| `numberOfFish`        | number    | `1`                   | Number of fish that will show on the screen.                           |
 
 ## 🐡 License, Contributing, etc.
 

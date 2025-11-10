@@ -21,6 +21,8 @@ M.defaultOptions = {
         right = '><>', -- fish moving to the right
         color = '#FFFFFF', -- color of the fish
     },
+    -- number of fish shown on the screen
+    numberOfFish = 1,
 }
 
 M.validateOptions = function(opts)
@@ -55,6 +57,8 @@ M.validateOptions = function(opts)
                     )
                 end
             end
+        elseif key == 'numberOfFish' then
+            checkType(value, 'opts.screensaver.numberOfFish', 'number')
         else
             error(
                 '"opts.' .. key .. '" is not a valid option for fishtank.nvim'
