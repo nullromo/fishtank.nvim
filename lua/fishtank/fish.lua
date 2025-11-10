@@ -6,13 +6,14 @@ local path = require('fishtank.path')
 Fish = {}
 
 function Fish:new(o)
-    o = o or {
-        position = { row = 0, col = 0 },
-        text = '',
-        bufferID = nil,
-        windowID = nil,
-        travelPoints = {},
-    }
+    o = o
+        or {
+            position = { row = 0, col = 0 },
+            text = '',
+            bufferID = nil,
+            windowID = nil,
+            travelPoints = {},
+        }
     setmetatable(o, self)
     self.__index = self
     o:initialize()
