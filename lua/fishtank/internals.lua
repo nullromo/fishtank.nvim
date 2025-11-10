@@ -20,7 +20,7 @@ local M = {}
 local globalState = {
     fishList = {},
     intervalID = nil,
-    state = constants.FISHTANK_HIDDEN,
+    state = constants.FishtankState.FISHTANK_HIDDEN,
     paused = false,
     screensaverTimer = nil,
 }
@@ -55,7 +55,7 @@ end
 ---@return nil
 local redrawFishtank = function()
     -- do nothing if the fishtank is not showing
-    if globalState.state == constants.FISHTANK_HIDDEN then
+    if globalState.state == constants.FishtankState.FISHTANK_HIDDEN then
         return
     end
 
@@ -105,7 +105,7 @@ end
 ---@return nil
 M.hideFishtank = function()
     -- if the fishtank is not showing, do nothing
-    if globalState.state == constants.FISHTANK_HIDDEN then
+    if globalState.state == constants.FishtankState.FISHTANK_HIDDEN then
         return
     end
 
@@ -115,7 +115,7 @@ M.hideFishtank = function()
     -- reset the global state
     vimUtils.clearInterval(globalState.intervalID)
     globalState.intervalID = nil
-    globalState.state = constants.FISHTANK_HIDDEN
+    globalState.state = constants.FishtankState.FISHTANK_HIDDEN
 end
 
 -- turns on the fishtank and initializes the state
@@ -123,7 +123,7 @@ end
 ---@return nil
 M.showFishtank = function(args)
     -- if the fishtank is not already showing, show it
-    if globalState.state == constants.FISHTANK_HIDDEN then
+    if globalState.state == constants.FishtankState.FISHTANK_HIDDEN then
         -- initialize the fish
         initializeFish()
 
@@ -138,13 +138,14 @@ M.showFishtank = function(args)
     end
 
     -- update the global state
-    globalState.state = (args or {}).state or constants.FISHTANK_SHOWN_BY_USER
+    globalState.state = (args or {}).state
+        or constants.FishtankState.FISHTANK_SHOWN_BY_USER
 end
 
 -- shows or hides the fish
 ---@return nil
 M.toggleFishtank = function()
-    if globalState.state == constants.FISHTANK_HIDDEN then
+    if globalState.state == constants.FishtankState.FISHTANK_HIDDEN then
         M.showFishtank()
     else
         M.hideFishtank()
@@ -201,9 +202,9 @@ local startScreensaverTimer = function()
         options.opts.screensaver.timeout,
         0,
         vim.schedule_wrap(function()
-            if globalState.state == constants.FISHTANK_HIDDEN then
+            if globalState.state == constants.FishtankState.FISHTANK_HIDDEN then
                 M.showFishtank({
-                    state = constants.FISHTANK_SHOWN_BY_TIMER,
+                    state = constants.FishtankState.FISHTANK_SHOWN_BY_TIMER,
                 })
             end
         end)
@@ -225,7 +226,7 @@ end
 ---@return nil
 M.userNotIdle = function()
     -- if the screensaver is on, turn it off
-    if globalState.state == constants.FISHTANK_SHOWN_BY_TIMER then
+    if globalState.state == constants.FishtankState.FISHTANK_SHOWN_BY_TIMER then
         M.hideFishtank()
     end
 
