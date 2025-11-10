@@ -10,8 +10,7 @@ local M = {}
 ---@return number
 M.computeDistance = function(start, finish)
     return math.sqrt(
-        math.pow(finish.row - start.row, 2)
-            + math.pow(finish.col - start.col, 2)
+        ((finish.row - start.row) ^ 2) + ((finish.col - start.col) ^ 2)
     )
 end
 
