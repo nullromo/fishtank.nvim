@@ -48,7 +48,7 @@ function Fish:initialize()
     -- create a floating window and set the global window ID
     self.windowID = vim.api.nvim_open_win(self.bufferID, false, {
         relative = 'editor',
-        width = vim.fn.strdisplaywidth(self.text),
+        width = luaUtils.getLongestLineLength(self.text),
         height = 1,
         row = self.position.row,
         col = self.position.col,
