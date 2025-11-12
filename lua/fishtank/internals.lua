@@ -68,27 +68,28 @@ local redrawFishtank = function()
             break
         end
 
+        local lines = luaUtils.splitIntoLines(fish.text)
+        local longestLineLength = luaUtils.getLongestLineLength(fish.text)
+
         -- move the fishtank window
         vim.api.nvim_win_set_config(fish.windowID, {
             relative = 'editor',
             row = fish.position.row,
             col = fish.position.col,
+            width = longestLineLength,
+            height = #lines,
         })
 
         -- update the fish text
         -- NOTE: this will set the buffer's actual text, but the extmark uses
         -- the right colors
-        --vim.api.nvim_buf_set_lines(fish.bufferID, 0, 1, false, { fish.text })
+        vim.api.nvim_buf_set_lines(fish.bufferID, 0, -1, false, lines)
         vim.api.nvim_buf_set_extmark(
             fish.bufferID,
             colors.highlightNamespace,
             0,
             0,
-            {
-                id = 1,
-                virt_text_pos = 'overlay',
-                virt_text = { { fish.text, 'Fish' } },
-            }
+            { end_line = #lines, hl_group = 'Fish' }
         )
     end
 end
