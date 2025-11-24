@@ -26,7 +26,9 @@ end
 M.splitIntoLines = function(value)
     ---@type string[]
     local result = {}
-    for match in value:gmatch('([^(\n|\r\n)]+)') do
+    -- first replace all instances of \r\n with just \n
+    local cleaned = value:gsub('\r\n', '\n')
+    for match in cleaned:gmatch('([^\n]+)') do
         table.insert(result, match)
     end
     return result
