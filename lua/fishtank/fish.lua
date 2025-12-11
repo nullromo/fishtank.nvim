@@ -80,7 +80,7 @@ function Fish:initialize()
     })
     -- NOTE: transparent background would be ideal, but using this causes the
     -- foreground to also blend with what's behind it
-    --vim.api.nvim_set_option_value('winblend', 100, { win = self.windowID })
+    vim.api.nvim_set_option_value('winblend', 100, { win = self.windowID })
 
     -- clear travel points
     self.travelPoints = {}
